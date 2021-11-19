@@ -14,7 +14,7 @@ defmodule Distrilixir.Inventory.Category do
 
   def changeset(category, attrs) do
     category
-    |> cast(attrs, [:name, :description, :image_url])
+    |> cast(attrs, [:name, :description, :image_url, :parent_category_id])
     |> validate_required([:name])
   end
 end
