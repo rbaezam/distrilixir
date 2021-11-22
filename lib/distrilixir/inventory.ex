@@ -7,12 +7,14 @@ defmodule Distrilixir.Inventory do
   alias Distrilixir.Repo
 
   alias Distrilixir.Inventory.Category
+  alias Distrilixir.Inventory.Product
+  alias Distrilixir.Inventory.Warehouse
 
   @doc """
   Returns the list of categories
 
   ## Examples
-      iex> list_all_categories()
+      iex> get_all_categories()
       [%Category{}, ...]
   """
   def get_all_categories do
@@ -98,7 +100,7 @@ defmodule Distrilixir.Inventory do
   end
 
   @doc """
-  Returns and `%Ecto.Changeset{}` for trcking category changes.
+  Returns and `%Ecto.Changeset{}` for tracking category changes.
 
   ## Examples
 
@@ -109,4 +111,136 @@ defmodule Distrilixir.Inventory do
     Category.changeset(category, attrs)
   end
 
+  @doc """
+  Returns all products from given category
+
+  ## Examples
+
+    iex> get_products_by_category_id(valid_category_id)
+    [%Product{}, ...]
+  """
+  def get_products_by_category(category_id) do
+    query = from(p in Product, where: p.category_id == ^category_id)
+    Repo.all(query)
+  end
+
+  @doc """
+  Gets a single product
+
+  Raises `Ecto.NoResultsError` if the Product does not exist.
+
+  ## Examples
+
+    iex> get_product!(123)
+    %Product{}
+
+    iex> get_product!(999)
+    ** (Ecto.NoResultsError)
+  """
+  def get_product!(id), do: Repo.get!(Product, id)
+
+  @doc """
+  Creates a product
+
+  ## Examples
+
+    iex> create_product(%{name: "Product 1", category_id: 1})
+    {:ok, %Product{}}
+
+    iex> create_product(%{name: "Bad value"})
+    {:error, %Ecto.Changeset{}}
+  """
+  def create_product(attrs \\ %{}) do
+    %Product{}
+    |> Product.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a product
+
+  ## Examples
+
+    iex> update_product(product, %{description: new_value})
+    {:ok, %Product{}}
+
+    iex> update_product(product, %{description: bad_value})
+    {:error, %Ecto.Changeset{}}
+  """
+  def update_product(%Product{} = product, attrs) do
+    product
+    |> Product.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a product
+
+  ## Examples
+
+    iex> delete_product(valid_product)
+    {:ok, %Product{}}
+
+    iex> delete_product(invalid_product)
+    {:error, %Changeset{}}
+  """
+  def delete_product(%Product{} = product) do
+    Repo.delete(product)
+  end
+
+  @doc """
+  Returns and `%Ecto.Changeset{}` for tracking product changes
+
+  ## Examples
+
+    iex> change_category(product)
+    %Ecto.Changeset(data: %Product{})
+  """
+  def change_product(%Product{} = product, attrs \\ %{}) do
+    Product.changeset(product, attrs)
+  end
+
+  @doc """
+  Returns the list of warehouses
+
+  ## Examples
+
+    iex> get_all_warehouses()
+    [%Warehouse{}, ...]
+  """
+  def get_all_warehouses do
+    Repo.all(Warehouse)
+  end
+
+  @doc """
+  Gets a single warehouse
+
+  Raises `Ecto.NoResultsError` if the Warehouse does not exist.
+
+  ## Examples
+
+    iex> get_warehouse(123)
+    %Warehouse{}
+
+    iex> get_warehouse(0)
+    ** (Ecto.NoResultsError)
+  """
+  def get_warehouse!(id), do: Repo.get!(Warehouse, id)
+
+  @doc """
+  Creates a warehouse
+
+  ## Examples
+
+    iex> create_warehouse(%{name: name})
+    {:ok, %Warehouse{}}
+
+    iex> create_warehouse(%{name: invalid_name})
+    {:error, %Ecto.Changeset{}}
+  """
+  def create_warehouse(attrs \\ %{}) do
+    %Warehouse{}
+    |> Warehouse.changeset(attrs)
+    |> Repo.insert
+  end
 end
