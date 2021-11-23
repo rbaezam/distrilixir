@@ -34,7 +34,7 @@ defmodule Distrilixir.Locations do
     iex> get_state!(999)
     ** (Ecto.NoResultsError)
   """
-  def get_state!(id), do: Repo.get(State, id)
+  def get_state!(id), do: Repo.get!(State, id)
 
   @doc """
   Creates a state

@@ -243,4 +243,36 @@ defmodule Distrilixir.Inventory do
     |> Warehouse.changeset(attrs)
     |> Repo.insert
   end
+
+  @doc """
+  Updates a warehouse
+
+  ## Examples
+
+    iex> update_warehouse(warehouse, %{name: new_value})
+    {:ok, %Warehouse{}}
+
+    iex> update_warehouse(warehouse, %{name: bad_value})
+    {:error, %Ecto.Changeset{}}
+  """
+  def update_warehouse(%Warehouse{} = warehouse, attrs) do
+    warehouse
+    |> Warehouse.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a warehouse
+
+  ## Examples
+
+    iex> delete_warehouse(warehouse)
+    {:ok, %Warehouse{}}
+
+    iex> delete_warehouse(bad_warehouse)
+    {:error, %Changeset{}}
+  """
+  def delete_warehouse(%Warehouse{} = warehouse) do
+    Repo.delete(warehouse)
+  end
 end
