@@ -18,23 +18,10 @@ defmodule Distrilixir.Locations do
     [%State{}, ...]
   """
   def get_all_states do
-    Repo.all(State)
+    State
+    |> order_by(asc: :name)
+    |> Repo.all
   end
-
-  @doc """
-  Gets a single state
-
-  Raises `Ecto.NoResultsError` if the State does not exist.
-
-  ## Examples
-
-    iex> get_state!(123)
-    %State{}
-
-    iex> get_state!(999)
-    ** (Ecto.NoResultsError)
-  """
-  def get_state!(id), do: Repo.get!(State, id)
 
   @doc """
   Creates a state
@@ -111,7 +98,7 @@ defmodule Distrilixir.Locations do
     iex> get_city(0)
     ** (Ecto.NoResultsError)
   """
-  def get_city!(id), do: Repo.get!(City, id)
+  def get_city!(id), do: City |> where([city], city.id == ^id) |> preload(:state) |> Repo.one
 
   @doc """
   Creates a city
@@ -160,5 +147,82 @@ defmodule Distrilixir.Locations do
   """
   def delete_city(%City{} = city) do
     Repo.delete(city)
+  end
+
+  alias Distrilixir.Locations.State
+
+  @doc """
+  Returns the list of states.
+
+  ## Examples
+
+      iex> list_states()
+      [%State{}, ...]
+
+  """
+  def list_states do
+    State
+    |> order_by(asc: :name)
+    |> Repo.all
+  end
+
+  @doc """
+  Gets a single state.
+
+  Raises `Ecto.NoResultsError` if the State does not exist.
+
+  ## Examples
+
+      iex> get_state!(123)
+      %State{}
+
+      iex> get_state!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_state!(id), do: Repo.get!(State, id)
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking state changes.
+
+  ## Examples
+
+      iex> change_state(state)
+      %Ecto.Changeset{data: %State{}}
+
+  """
+  def change_state(%State{} = state, attrs \\ %{}) do
+    State.changeset(state, attrs)
+  end
+
+  alias Distrilixir.Locations.City
+
+  @doc """
+  Returns the list of cities.
+
+  ## Examples
+
+      iex> list_cities()
+      [%City{}, ...]
+
+  """
+  def list_cities do
+    City
+    |> preload(:state)
+    |> order_by(asc: :name)
+    |> Repo.all
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking city changes.
+
+  ## Examples
+
+      iex> change_city(city)
+      %Ecto.Changeset{data: %City{}}
+
+  """
+  def change_city(%City{} = city, attrs \\ %{}) do
+    City.changeset(city, attrs)
   end
 end
