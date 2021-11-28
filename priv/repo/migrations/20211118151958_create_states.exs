@@ -4,6 +4,7 @@ defmodule Distrilixir.Repo.Migrations.CreateStates do
   def change do
     create table(:states) do
       add :name, :string
+      add :image_url, :string
 
       timestamps()
     end
