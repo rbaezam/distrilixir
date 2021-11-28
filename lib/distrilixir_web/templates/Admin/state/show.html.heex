@@ -1,0 +1,18 @@
+<h1>Show State</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @state.name %>
+  </li>
+
+  <li>
+    <strong>Image url:</strong>
+    <%= @state.image_url %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.state_path(@conn, :edit, @state) %></span> |
+<span><%= link "Back", to: Routes.state_path(@conn, :index) %></span>

@@ -1,0 +1,7 @@
+<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+  <h1>Edit City</h1>
+
+  <%= render "form.html", Map.put(assigns, :action, Routes.city_path(@conn, :update, @city)) %>
+
+  <span><%= link "Back", to: Routes.city_path(@conn, :index) %></span>
+</div>

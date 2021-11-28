@@ -1,0 +1,30 @@
+<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+  <h1 class="admin-title">Listing Cities</h1>
+
+  <table class="border-collapse border border-green-800">
+    <thead>
+      <tr>
+        <th class="border-collapse border border-green-800 p-2 bg-green-800 text-white">Name</th>
+        <th class="border-collapse border border-green-800 p-2 bg-green-800 text-white">State</th>
+
+        <th class="border-collapse border border-green-800 p-2 bg-green-800 text-white"></th>
+      </tr>
+    </thead>
+    <tbody>
+  <%= for city <- @cities do %>
+      <tr>
+        <td class="border-collapse border border-green-800 p-2"><%= city.name %></td>
+        <td class="border-collapse border border-green-800 p-2"><%= city.state.name %></td>
+
+        <td class="border-collapse border border-green-800 p-2">
+          <span><%= link "Show", to: Routes.city_path(@conn, :show, city) %></span>
+          <span><%= link "Edit", to: Routes.city_path(@conn, :edit, city) %></span>
+          <span><%= link "Delete", to: Routes.city_path(@conn, :delete, city), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+  <% end %>
+    </tbody>
+  </table>
+
+  <div class="mt-4"><%= link "New City", to: Routes.city_path(@conn, :new), class: "btn-green" %></div>
+</div>

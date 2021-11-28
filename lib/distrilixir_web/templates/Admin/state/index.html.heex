@@ -1,0 +1,28 @@
+<h1>Listing States</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Image url</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for state <- @states do %>
+    <tr>
+      <td><%= state.name %></td>
+      <td><%= state.image_url %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.state_path(@conn, :show, state) %></span>
+        <span><%= link "Edit", to: Routes.state_path(@conn, :edit, state) %></span>
+        <span><%= link "Delete", to: Routes.state_path(@conn, :delete, state), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New State", to: Routes.state_path(@conn, :new) %></span>
