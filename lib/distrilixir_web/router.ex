@@ -7,21 +7,28 @@ defmodule DistrilixirWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {DistrilixirWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
+  end
+
+  pipeline :public_layout do
+    plug :put_root_layout, {DistrilixirWeb.LayoutView, :root}
+  end
+
+  pipeline :admin_layout do
+    plug :put_layout, {DistrilixirWeb.AdminLayoutView, :admin}
   end
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  scope "/", DistrilixirWeb do
-    pipe_through :browser
+  # scope "/", DistrilixirWeb do
+  #   pipe_through :browser
 
-    get "/", PageController, :index
-  end
+  #   get "/", PageController, :index
+  # end
 
   # Other scopes may use custom stacks.
   # scope "/api", DistrilixirWeb do
@@ -77,15 +84,25 @@ defmodule DistrilixirWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+
   end
 
   scope "/", DistrilixirWeb do
-    pipe_through [:browser]
+    pipe_through [:browser, :public_layout]
+
+    get "/", PageController, :index
 
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
+  end
+
+  scope "/admin", DistrilixirWeb.Admin do
+    pipe_through [:browser, :require_authenticated_user, :admin_layout]
+
+    resources "/cities", CityController
+    resources "/states", StateController
   end
 end
