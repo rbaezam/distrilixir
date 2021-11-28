@@ -1,5 +1,32 @@
-/* This file is for your main application CSS */
-@import "./phoenix.css";
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap');
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+}
+
+.admin-title {
+  @apply font-bold my-2;
+}
+
+.btn-green {
+  @apply font-bold p-2 rounded bg-green-800 text-white;
+}
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
 
 /* Alerts and form errors used by phx.new */
 .alert {
