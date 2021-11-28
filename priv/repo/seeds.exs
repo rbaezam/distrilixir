@@ -11,6 +11,8 @@
 # and so on) as they will fail if something goes wrong.
 
 alias Distrilixir.Repo
+alias Distrilixir.Accounts
+alias Distrilixir.Accounts.User
 alias Distrilixir.Locations
 alias Distrilixir.Locations.City
 alias Distrilixir.Locations.State
@@ -19,8 +21,13 @@ alias Distrilixir.Inventory.Warehouse
 alias Distrilixir.Sales
 alias Distrilixir.Sales.Store
 
+Repo.delete_all(User)
+Repo.delete_all(Warehouse)
+Repo.delete_all(Store)
 Repo.delete_all(City)
 Repo.delete_all(State)
+
+Accounts.register_user(%{email: "rbaezam@gmail.com", password: "password123"})
 
 {:ok, state_yuc} = Locations.create_state(%{name: "Yucatán"})
 {:ok, state_qr} = Locations.create_state(%{name: "Quintana Roo"})
