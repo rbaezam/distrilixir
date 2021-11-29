@@ -1,0 +1,33 @@
+<h1>Show Distributor</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @distributor.name %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @distributor.email %>
+  </li>
+
+  <li>
+    <strong>Phone number:</strong>
+    <%= @distributor.phone_number %>
+  </li>
+
+  <li>
+    <strong>Active:</strong>
+    <%= @distributor.active %>
+  </li>
+
+  <li>
+    <strong>Opening date:</strong>
+    <%= @distributor.opening_date %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.distributor_path(@conn, :edit, @distributor) %></span> |
+<span><%= link "Back", to: Routes.distributor_path(@conn, :index) %></span>

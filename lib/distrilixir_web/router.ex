@@ -102,7 +102,9 @@ defmodule DistrilixirWeb.Router do
   scope "/admin", DistrilixirWeb.Admin do
     pipe_through [:browser, :require_authenticated_user, :admin_layout]
 
-    resources "/cities", CityController
-    resources "/states", StateController
+    resources "/ciudades", CityController
+    resources "/estados", StateController
+
+    resources "/distribuidores", DistributorController
   end
 end

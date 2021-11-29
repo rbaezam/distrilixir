@@ -1,0 +1,5 @@
+<h1>Edit Distributor</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.distributor_path(@conn, :update, @distributor)) %>
+
+<span><%= link "Back", to: Routes.distributor_path(@conn, :index) %></span>
