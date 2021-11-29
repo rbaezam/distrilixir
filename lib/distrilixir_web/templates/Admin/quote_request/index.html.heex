@@ -1,0 +1,26 @@
+<h1>Listing Quote requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Notes</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for quote_request <- @quote_requests do %>
+    <tr>
+      <td><%= quote_request.notes %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.quote_request_path(@conn, :show, quote_request) %></span>
+        <span><%= link "Edit", to: Routes.quote_request_path(@conn, :edit, quote_request) %></span>
+        <span><%= link "Delete", to: Routes.quote_request_path(@conn, :delete, quote_request), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Quote request", to: Routes.quote_request_path(@conn, :new) %></span>

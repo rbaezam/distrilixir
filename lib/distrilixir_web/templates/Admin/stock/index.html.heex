@@ -1,0 +1,26 @@
+<h1>Listing Stocks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Quantity</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for stock <- @stocks do %>
+    <tr>
+      <td><%= stock.quantity %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.stock_path(@conn, :show, stock) %></span>
+        <span><%= link "Edit", to: Routes.stock_path(@conn, :edit, stock) %></span>
+        <span><%= link "Delete", to: Routes.stock_path(@conn, :delete, stock), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Stock", to: Routes.stock_path(@conn, :new) %></span>

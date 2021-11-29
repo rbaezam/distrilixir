@@ -1,0 +1,13 @@
+<h1>Show Quote request</h1>
+
+<ul>
+
+  <li>
+    <strong>Notes:</strong>
+    <%= @quote_request.notes %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.quote_request_path(@conn, :edit, @quote_request) %></span> |
+<span><%= link "Back", to: Routes.quote_request_path(@conn, :index) %></span>

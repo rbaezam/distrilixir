@@ -96,4 +96,100 @@ defmodule Distrilixir.Sales do
   def delete_store(%Store{} = store) do
     Repo.delete(store)
   end
+
+  alias Distrilixir.Sales.QuoteRequest
+
+  @doc """
+  Returns the list of quote_requests.
+
+  ## Examples
+
+      iex> list_quote_requests()
+      [%QuoteRequest{}, ...]
+
+  """
+  def list_quote_requests do
+    Repo.all(QuoteRequest)
+  end
+
+  @doc """
+  Gets a single quote_request.
+
+  Raises `Ecto.NoResultsError` if the Quote request does not exist.
+
+  ## Examples
+
+      iex> get_quote_request!(123)
+      %QuoteRequest{}
+
+      iex> get_quote_request!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_quote_request!(id), do: Repo.get!(QuoteRequest, id)
+
+  @doc """
+  Creates a quote_request.
+
+  ## Examples
+
+      iex> create_quote_request(%{field: value})
+      {:ok, %QuoteRequest{}}
+
+      iex> create_quote_request(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_quote_request(attrs \\ %{}) do
+    %QuoteRequest{}
+    |> QuoteRequest.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a quote_request.
+
+  ## Examples
+
+      iex> update_quote_request(quote_request, %{field: new_value})
+      {:ok, %QuoteRequest{}}
+
+      iex> update_quote_request(quote_request, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_quote_request(%QuoteRequest{} = quote_request, attrs) do
+    quote_request
+    |> QuoteRequest.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a quote_request.
+
+  ## Examples
+
+      iex> delete_quote_request(quote_request)
+      {:ok, %QuoteRequest{}}
+
+      iex> delete_quote_request(quote_request)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_quote_request(%QuoteRequest{} = quote_request) do
+    Repo.delete(quote_request)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking quote_request changes.
+
+  ## Examples
+
+      iex> change_quote_request(quote_request)
+      %Ecto.Changeset{data: %QuoteRequest{}}
+
+  """
+  def change_quote_request(%QuoteRequest{} = quote_request, attrs \\ %{}) do
+    QuoteRequest.changeset(quote_request, attrs)
+  end
 end

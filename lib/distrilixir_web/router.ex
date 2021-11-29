@@ -106,5 +106,9 @@ defmodule DistrilixirWeb.Router do
     resources "/estados", StateController
 
     resources "/distribuidores", DistributorController
+
+    resources "/existencias", StockController
+
+    resources "/solicitudes-de-cotizacion", QuoteRequestController
   end
 end
